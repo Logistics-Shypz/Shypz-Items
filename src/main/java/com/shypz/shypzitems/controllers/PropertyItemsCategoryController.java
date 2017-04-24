@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shypz.shypzitems.pojo.Property_Items_Category;
+import com.shypz.shypzitems.pojo.Category;
 import com.shypz.shypzitems.services.PropertyItemsCategoryService;
 
 
@@ -27,20 +27,20 @@ public class PropertyItemsCategoryController {
 	private PropertyItemsCategoryService propertyItemsCategoryService;
 	
 	@RequestMapping("/items")
-	public List<Property_Items_Category> getAllItems(){
+	public List<Category> getAllItems(){
 		
 		return propertyItemsCategoryService.getAllItems();
 	}
 	
 	@RequestMapping("/items/id/{itemid}")
-	public Property_Items_Category getItemById(@PathVariable long itemid){
+	public Category getItemById(@PathVariable long itemid){
 		
-		Property_Items_Category pic = propertyItemsCategoryService.getItemById(itemid);
+		Category pic = propertyItemsCategoryService.getItemById(itemid);
 		return pic;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/items")
-	public void addPropertyItemsCategory(@RequestBody Property_Items_Category  pic){
+	public void addPropertyItemsCategory(@RequestBody Category  pic){
 		
 		log.info(pic.getUserItemCategoryName() + " " + pic.getUserItemCategoryDescription());
 		propertyItemsCategoryService.addPropertyItemsCategory(pic);
@@ -48,7 +48,7 @@ public class PropertyItemsCategoryController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/items/id/{itemid}")
-	public void updatePropertyItemsCategory(@RequestBody Property_Items_Category pic, @PathVariable long itemid){
+	public void updatePropertyItemsCategory(@RequestBody Category pic, @PathVariable long itemid){
 		log.info(pic.getUserItemCategoryDescription() + " " + pic.getUserItemCategoryName());
 		propertyItemsCategoryService.updateItemById(pic,itemid);
 		

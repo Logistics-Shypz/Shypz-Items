@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shypz.shypzitems.DAO.PropertyItemsCategoryDAO;
-import com.shypz.shypzitems.pojo.Property_Items_Category;
+import com.shypz.shypzitems.pojo.Category;
 
 
 
@@ -17,28 +17,28 @@ public class PropertyItemsCategoryService {
 	@Autowired
 	private PropertyItemsCategoryDAO propitemcatdao;
 
-	public void addPropertyItemsCategory(Property_Items_Category pic) {
+	public void addPropertyItemsCategory(Category pic) {
 		// TODO Auto-generated method stub
 		propitemcatdao.save(pic);
 	}
 
-	public List<Property_Items_Category> getAllItems() {
+	public List<Category> getAllItems() {
 		// TODO Auto-generated method stub
-		List<Property_Items_Category> propitemcat = new ArrayList<>();
+		List<Category> propitemcat = new ArrayList<>();
 		propitemcatdao.findAll()
 		.forEach(propitemcat::add);
 		return propitemcat;
 	}
 
-	public Property_Items_Category getItemById(long itemid) {
+	public Category getItemById(long itemid) {
 		// TODO Auto-generated method stub
 		return propitemcatdao.findOne(itemid);
 	}
 
-	public void updateItemById(Property_Items_Category pic, long itemid) {
+	public void updateItemById(Category pic, long itemid) {
 		// TODO Auto-generated method stub
 		
-		Property_Items_Category p = propitemcatdao.findOne(itemid);
+		Category p = propitemcatdao.findOne(itemid);
 		if(p == null){
 			System.out.println("In save");
 			propitemcatdao.save(pic);

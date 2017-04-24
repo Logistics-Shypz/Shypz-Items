@@ -2,9 +2,9 @@ package com.shypz.shypzitems.DAO;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.shypz.shypzitems.pojo.Property_Items_Category;
+import com.shypz.shypzitems.pojo.Category;
 
-public interface PropertyItemsCategoryDAO extends CrudRepository<Property_Items_Category, Long>{
+public interface PropertyItemsCategoryDAO extends CrudRepository<Category, Long>{
 	
 	
 	
