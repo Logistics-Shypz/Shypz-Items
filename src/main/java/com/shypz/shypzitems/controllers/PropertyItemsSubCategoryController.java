@@ -2,6 +2,8 @@ package com.shypz.shypzitems.controllers;
 
 import java.util.List;
 
+import javax.ws.rs.Path;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,16 @@ public class PropertyItemsSubCategoryController {
 		propertyItemsSubCategoryService.addPropertyItemsSubcat(pisc);
 		
 		
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT,value="/items/catid/{category_id}/subcat/{subcategory_id}")
+	public void updatePropertyItemsSubcat(@RequestBody Subcategory pisc,@PathVariable long category_id,@PathVariable long subcategory_id){
+		
+		Category cat = propertyItemsCategoryService.getItemById(category_id);
+		pisc.setcategory(cat);
+		
+		propertyItemsSubCategoryService.updatePropertyItemsSubcat(pisc,subcategory_id);
 		
 	}
 	

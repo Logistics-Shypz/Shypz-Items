@@ -47,6 +47,21 @@ public class PropertyItemsSubCategoryService {
 		.forEach(propitemsubcat::add);
 		return propitemsubcat;
 	}
+
+	public void updatePropertyItemsSubcat(Subcategory pisc, long subcategory_id) {
+		// TODO Auto-generated method stub
+		Subcategory subcat = piscdao.findOne(subcategory_id);
+		if(subcat == null){
+			log.info("Posting a new subcategory objhecting");
+			piscdao.save(pisc);
+		}else{
+			log.info("Updating a new subcategory object");
+			subcat.setUserItemSubCategoryName(pisc.getUserItemSubCategoryName());
+			subcat.setUserItemSubCategoryQuantity(pisc.getUserItemSubCategoryQuantity());
+			piscdao.save(subcat);
+		}
+		
+	}
 	
 	
 
