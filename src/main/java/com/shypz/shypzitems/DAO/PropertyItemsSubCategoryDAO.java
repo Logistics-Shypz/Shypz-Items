@@ -12,4 +12,5 @@ public interface PropertyItemsSubCategoryDAO extends CrudRepository<Subcategory,
 	
 	
 	public List<Subcategory> findByCategoryUserItemCategoryId(long id);
+	public Subcategory findByUserItemSubCategoryName(String sub_category_name);
 }

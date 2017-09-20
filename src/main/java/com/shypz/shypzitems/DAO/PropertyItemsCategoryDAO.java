@@ -7,6 +7,6 @@ import com.shypz.shypzitems.pojo.Category;
 public interface PropertyItemsCategoryDAO extends CrudRepository<Category, Long>{
 	
 	
-	
+	public Category findByUserItemCategoryName(String category_name);
 
 }

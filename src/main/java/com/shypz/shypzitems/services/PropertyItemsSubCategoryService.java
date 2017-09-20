@@ -23,10 +23,21 @@ public class PropertyItemsSubCategoryService {
 	@Autowired
 	private PropertyItemsSubCategoryDAO piscdao;
 
-	public void addPropertyItemsSubcat(Subcategory pisc) {
+	public boolean addPropertyItemsSubcat(Subcategory pisc) {
 		// TODO Auto-generated method stub
 		
-		piscdao.save(pisc);
+		
+		Subcategory sub_cat_exist = piscdao.findByUserItemSubCategoryName(pisc.getUserItemSubCategoryName());
+		if(sub_cat_exist == null){
+			System.out.println("In Add Sub Category Items");
+			piscdao.save(pisc);
+			return false;
+			
+		}
+		else{
+			System.out.println("Sub Category Item already exist");
+			return true;
+		}
 		
 	}
 
@@ -48,17 +59,19 @@ public class PropertyItemsSubCategoryService {
 		return propitemsubcat;
 	}
 
-	public void updatePropertyItemsSubcat(Subcategory pisc, long subcategory_id) {
+	public boolean updatePropertyItemsSubcat(Subcategory pisc, long subcategory_id) {
 		// TODO Auto-generated method stub
 		Subcategory subcat = piscdao.findOne(subcategory_id);
 		if(subcat == null){
-			log.info("Posting a new subcategory objhecting");
+			log.info("Posting a new subcategory object");
 			piscdao.save(pisc);
+			return false;
 		}else{
 			log.info("Updating a new subcategory object");
 			subcat.setUserItemSubCategoryName(pisc.getUserItemSubCategoryName());
 			subcat.setUserItemSubCategoryQuantity(pisc.getUserItemSubCategoryQuantity());
 			piscdao.save(subcat);
+			return true;
 		}
 		
 	}

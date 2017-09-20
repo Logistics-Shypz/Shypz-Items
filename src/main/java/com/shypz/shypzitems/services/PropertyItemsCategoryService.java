@@ -17,9 +17,21 @@ public class PropertyItemsCategoryService {
 	@Autowired
 	private PropertyItemsCategoryDAO propitemcatdao;
 
-	public void addPropertyItemsCategory(Category pic) {
+	public boolean addPropertyItemsCategory(Category pic) {
 		// TODO Auto-generated method stub
-		propitemcatdao.save(pic);
+		
+		Category cat_exist = propitemcatdao.findByUserItemCategoryName(pic.getUserItemCategoryName());
+		if(cat_exist == null){
+			System.out.println("In Add Items");
+			propitemcatdao.save(pic);
+			return false;
+			
+		}
+		else{
+			System.out.println("Item Category already exist");
+			return true;
+		}
+		
 	}
 
 	public List<Category> getAllItems() {
@@ -35,27 +47,36 @@ public class PropertyItemsCategoryService {
 		return propitemcatdao.findOne(itemid);
 	}
 
-	public void updateItemById(Category pic, long itemid) {
+	public boolean updateItemById(Category pic, long itemid) {
 		// TODO Auto-generated method stub
 		
 		Category p = propitemcatdao.findOne(itemid);
 		if(p == null){
 			System.out.println("In save");
 			propitemcatdao.save(pic);
+			return false;
 		}
 		else{
 			System.out.println("In update");
 			p.setUserItemCategoryName(pic.getUserItemCategoryName());
 			p.setUserItemCategoryDescription(pic.getUserItemCategoryDescription());
 			propitemcatdao.save(p);
+			return true;
 		}
 		
 	}
 
-	public void deleteItemById(long itemid) {
+	public boolean deleteItemById(long itemid) {
 		// TODO Auto-generated method stub
 		
-		propitemcatdao.delete(itemid);
+		Category items_cat = propitemcatdao.findOne(itemid);
+		if(items_cat == null){
+			return false;
+		}else{
+			propitemcatdao.delete(itemid);
+			return true;
+		}
+		
 		
 	}
 
